@@ -22,3 +22,7 @@ Route::get('/user', 'IndexController@index');
 Route::get('/training', 'IndexController@training');
 Route::get('/exam', 'IndexController@exam');
 Route::get('/reports', 'IndexController@showReports');
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
