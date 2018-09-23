@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/home', 'HomeController@index');
+
 Route::get('/admin', 'AdminController@index');
 Route::get('/admin/students', 'AdminController@showStudents');
 Route::get('/admin/questions', 'AdminController@showQuestions');
@@ -25,4 +27,3 @@ Route::get('/reports', 'IndexController@showReports');
 
 Route::auth();
 
-Route::get('/home', 'HomeController@index');
