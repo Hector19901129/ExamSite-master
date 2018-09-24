@@ -5,25 +5,20 @@
         <div class="navbar navbar-inner block-header">
 
             
-            <div class="muted pull-right"><span class="badge badge-info">17</span></div>
-            <div>Time 1 : 12 : 01</div>
+            
+            <div>Click start button to take exam.</div>
             
         </div>
 
         <div class="block-content collapse in">
             <div class="span12">
                 <div class="well" style="margin-top:30px;">
-                    <h4>Please choose right answers. </h4>
+                    <h3>Total count of quiz : {{$quiz_count}}(Chemistry:{{$quiz_count/2}}, Biology:{{$quiz_count/2}}) </h4>
 
-                   
-                    <button type="button" class="btn btn-large btn-block">Click Right answer1</button>
-                    <button type="button" class="btn btn-large btn-block">Click Right answer1</button>
-                    <button type="button" class="btn btn-large btn-block">Click Right answer1</button>
-                    <button type="button" class="btn btn-large btn-block">Click Right answer1</button>
-                    <button type="button" class="btn btn-large btn-block">Click Right answer1</button>
+                    <h3>Time per quiz :  {{$time}} min</h4>
+                    <h4>Total time : {{$time * $quiz_count}} min</h4>
                 </div>
-                <button class="btn btn-success pull-right">Next</button>
-                <button class="btn btn-danger pull-left">Start</button>
+                <button class="btn btn-success pull-right" id="start">Start Exam</button>
             </div>
         </div>
     </div>
@@ -83,6 +78,14 @@
                 alert('Finished!, Starting over!');
                 $('#rootwizard').find("a[href*='tab1']").trigger('click');
             });
+        });
+        $('#start').click(function(){
+            event.preventDefault();
+            $.ajax({type: "POST", url: "/startexam", data: {
+                    '_token': $('meta[name="csrf-token"]').attr('content'),
+                }, success: function(result){
+                $('#maincontent').html(result);
+            }});
         });
         </script>
         
