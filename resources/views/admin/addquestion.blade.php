@@ -162,7 +162,7 @@
 
                 }
                 $.ajax({type: "POST", url: "/addquestion", data: data, success: function(result){
-                        $('.alert-success').show();
+                        alert("Added a question successfully!");
                 }});
                 
             });
