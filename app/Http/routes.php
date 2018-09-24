@@ -18,12 +18,15 @@ Route::get('/', function () {
 Route::get('/home', 'HomeController@index');
 
 Route::get('/admin', 'AdminController@index');
-Route::get('/admin/students', 'AdminController@showStudents');
-Route::get('/admin/questions', 'AdminController@showQuestions');
-Route::get('/user', 'IndexController@index');
-Route::get('/training', 'IndexController@training');
-Route::get('/exam', 'IndexController@exam');
-Route::get('/reports', 'IndexController@showReports');
+Route::post('/adminstudents', 'AdminController@showStudents');
+Route::post('/adminquestions', 'AdminController@showQuestions');
+Route::post('/admindashboard', 'AdminController@showDashboard');
+Route::post('/userdashboard', 'IndexController@index');
+Route::post('/training', 'IndexController@training');
+Route::post('/exam', 'IndexController@exam');
+Route::post('/reports', 'IndexController@showReports');
+Route::post('/viewquestion', 'AdminController@viewquestion');
+Route::post('/addquestion', 'AdminController@addquestion');
 
 Route::auth();
 

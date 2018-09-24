@@ -1,9 +1,7 @@
 @extends('layouts.default')
 
 
-@section('header')
-    @include('includes.header')
-@endsection
+
 
 @section('content')
 <div class="container-fluid">
@@ -18,7 +16,7 @@
                 @include('components.statusbar')
                 @include('components.taskbar')
             </div>
-            <div class="row-fluid">
+            <div id="maincontent">
                 @yield('maincontent')
             </div>
         </div>

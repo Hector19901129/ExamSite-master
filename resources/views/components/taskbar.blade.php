@@ -4,7 +4,7 @@
             <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
             <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
             <li>
-                <a href="#">Dashboard</a> 
+                <a href="#" id = "taskbar">Dashboard</a> 
             </li>
         </ul>
     </div>
