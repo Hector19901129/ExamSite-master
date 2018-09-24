@@ -98,6 +98,7 @@
         $('#next').click(function(){
             var current_num = $('#current_num').text() / 1;
             var answer = '';
+            var question_id = {{$question->id}};
             event.preventDefault();
             for(var i = 0; i < {{count($answer_array)}}; i++)
             {
@@ -112,6 +113,7 @@
                 {
                     '_token': $('meta[name="csrf-token"]').attr('content'),
                     'answer' : answer,
+                    'question_id' : question_id,
                     'current_num' : current_num
                 }, 
                 success: function(result){
@@ -129,6 +131,7 @@
                     alert('Time is up. Take next quiz please.');
                     var current_num = $('#current_num').text() / 1;
                     var answer = '';
+                    var question_id = {{$question->id}};
                     for(var i = 0; i < {{count($answer_array)}}; i++)
                     {
                         if($('.answer'+ (i + 1)).attr('id') == 1)
@@ -141,6 +144,7 @@
                         {
                         '_token': $('meta[name="csrf-token"]').attr('content'),
                         'answer' : answer,
+                        'question_id' : question_id,
                         'current_num' : current_num
                         }, 
                         success: function(result)

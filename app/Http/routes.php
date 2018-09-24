@@ -25,6 +25,7 @@ Route::post('/userdashboard', 'IndexController@index');
 Route::post('/training', 'IndexController@training');
 Route::post('/exam', 'IndexController@exam');
 Route::post('/startexam', 'IndexController@startExam');
+Route::post('/examnext', 'IndexController@nextExam');
 Route::post('/reports', 'IndexController@showReports');
 Route::post('/viewquestion', 'AdminController@viewquestion');
 Route::post('/addquestion', 'AdminController@addquestion');

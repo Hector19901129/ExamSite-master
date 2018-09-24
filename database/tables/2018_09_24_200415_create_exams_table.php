@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateScoresTable extends Migration
+class CreateExamsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,12 @@ class CreateScoresTable extends Migration
      */
     public function up()
     {
-        Schema::table('scores', function (Blueprint $table) {
+        Schema::create('exams', function (Blueprint $table) {
             $table->increments('id');
-            $table->string("user_id");
-            $table->string("score");
-            $table->timestamp('created_at');
+            $table->integer('user_id');
+            $table->float('aver_score');
+            $table->boolean('not_finished');
+            $table->timestamps("created_at");
         });
     }
 
@@ -27,8 +28,6 @@ class CreateScoresTable extends Migration
      */
     public function down()
     {
-        Schema::table('scores', function (Blueprint $table) {
-            Schema::drop('scores');
-        });
+        Schema::drop('exams');
     }
 }

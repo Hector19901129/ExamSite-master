@@ -17,4 +17,9 @@ class Question extends Model
     {
         return $this->belongsTo('App\Field');
     }
+    
+    // public function marks()
+    // {
+    //     return $this->hasMany('App\Marks');
+    // }
 }
