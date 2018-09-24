@@ -19,6 +19,8 @@ class CreateUsersTable extends Migration
             $table->string("email")->uique();
             $table->string("password");
             $table->integer("role_id", 2);
+            $table->integer('exam_count', 0);
+            $table->float('aver_score', 0.0);
             $table->rememberToken();
             $table->timestamps();
         });
