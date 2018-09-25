@@ -101,9 +101,11 @@
 
         $('.btn.btn-success').click(function(){
             var created_at = $(this).attr('id');
+            var current_num = 1;
             event.preventDefault();
             $.ajax({type: "POST", url: "/view", data: {
                     'created_at' : created_at,
+                    'current_num' : current_num,
                     '_token': $('meta[name="csrf-token"]').attr('content'),
                 }, success: function(result){
                     $('#maincontent').html(result);

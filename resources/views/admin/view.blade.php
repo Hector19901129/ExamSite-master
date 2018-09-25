@@ -3,7 +3,7 @@
     <!-- block -->
     <div class="block">
         <div class="navbar navbar-inner block-header" style="text-align:center">
-            <h4>{{$question->field->title}}</h4>
+            <h4>{{$field}}</h4>
         
 
         </div>
@@ -12,18 +12,35 @@
             <div class="span12">
                 <div class="well" style="margin-top:30px;">
                     <h4>{{$question->quiz}}</h4>
+                    
                     @for($i = 0; $i < count($answer_array) - 1; $i++)
-                            <button type="button" class="btn btn-large btn-block" id="0" style="text-align:left;padding-left:20px;padding-right:20px;">
+                            <button type="button" class="btn btn-large btn-block" id="answer{{$i + 1}}" style="text-align:left;padding-left:20px;padding-right:20px;">
                             {{$i + 1}}.{{$answer_array[$i]}}
                             @if(in_array(($i + 1), $right_answer_id))
-                                <i class="icon-ok pull-right" id="right_answer" style="display:none"></i></button>
+                                <i class="icon-ok pull-right"></i>
+                            @endif
+                            </button>
+                            @if(in_array(($i + 1), $your_answer_array))
+                                <script>
+                                    $('#answer{{$i + 1}}').css('margin-top',  "5px");
+                                    $('#answer{{$i + 1}}').css('background-color',  "#d2d7a7");
+                                    $('#answer{{$i + 1}}').css("background-image", "linear-gradient(to bottom,#d2d7a7,#d2d7a7)");
+                                </script>
                             @endif
                     @endfor
                 </div>
-                
-                <button class="btn btn-success pull-right" id="next">Next</button>
+                <span id='current_num' style="display:none">{{$current_num}}</span>
+                <span id='created_at' style="display:none">{{$created_at}}</span>
+                <ul class="pager wizard pull-right">
+                                                
+                    <!-- <li class="next last" style=""><a href="javascript:void(0);" id="back">Back</a></li> -->
+                    <li class="next last" style=""><a href="javascript:void(0);" id="next">Next</a></li>
+                    <li class="next last" style=""><a href="javascript:void(0);" id="previous">Previous</a></li>
+                    
+                    
+                </ul>
 
-                <button class="btn btn-primary pull-right" style="margin-right:20px" id="answer">Answer</button>
+                
             </div>
         </div>
     </div>
@@ -102,15 +119,45 @@
             $('#right_answer').show();
         });
         $('#next').click(function(){
-            
-                    event.preventDefault();
-                    $.ajax({type: "POST", url: "/training", data: {
+                    event.preventDefault(); 
+                    var created_at = $("#created_at").text();
+                    var current_num = $("#current_num").text();
+
+
+                    if({{$quiz_count}} == current_num) 
+                    {
+                        alert('It is last quiz.');
+                        return;
+                    }
+                    $.ajax({type: "POST", url: "/view", data: {
+                        'created_at' : created_at,
+                        'current_num' : current_num / 1 + 1,
                             '_token': $('meta[name="csrf-token"]').attr('content'),
                         }, success: function(result){
-                        $('#maincontent').html(result);
+                            $('#maincontent').html(result);
                     }});
              
             
+        });
+        $('#previous').click(function(){
+            
+                    event.preventDefault(); 
+                    var created_at = $("#created_at").text();
+                    var current_num = $("#current_num").text();
+                    if(current_num == 1) 
+                    {
+                        alert('It is first quiz.');
+                        return;
+                    }
+                    $.ajax({type: "POST", url: "/view", data: {
+                        'created_at' : created_at,
+                        'current_num' : current_num / 1 - 1,
+                            '_token': $('meta[name="csrf-token"]').attr('content'),
+                        }, success: function(result){
+                            $('#maincontent').html(result);
+                    }});
+     
+    
         });
         </script>
         

@@ -165,8 +165,30 @@ class IndexController extends Controller
         $user = User::where('email', \Auth::user()->email)->first();
         $user_id = $user->id;
         $created_at = $request->input('created_at');
-        $reports = Exam::where('user_id', $user_id)->get();
+        $current_num = $request->input('current_num');
+        try {
+            $exam = Exam::where('user_id', $user_id)->where('created_at', $created_at)->first();
         
-        return view('admin/reports', ['exam_count' => $exam_count, 'total_score' => $total_score, 'reports' => $reports]);
+            $exam = Exam::where('user_id', $user_id)->where('created_at', $created_at)->first();
+
+            //get reports according user id and created_at using pivot
+            $views = $exam->reports()->get();
+            $view = $views[$current_num - 1];
+            $question_id = $view->question->id;
+            $field = Question::find($question_id)->field->title;
+            $answer = $view->answer;
+            $answer_array = explode(',', $answer);
+            $right_answer = $view->question->right_answer_num;
+            $right_answer_id = explode(',', $right_answer);
+            $question = $view->question;
+            $answer = $question->answers;
+            $answer_array = explode('\\\\', $answer);
+            $your_answer = $view->answer;
+            $your_answer_array = explode(',', $your_answer);
+            $quiz_count = count($views);
+        } catch (\Exception $exception) {
+            return view('admin/exception');
+        }
+        return view('admin/view', ['quiz_count' => $quiz_count, 'created_at' => $created_at, 'question' => $question, 'field' => $field, 'answer_array' => $answer_array, 'right_answer_id' => $right_answer_id, 'current_num' => $current_num, 'your_answer_array' => $your_answer_array]);
     }
 }
