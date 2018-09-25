@@ -57,11 +57,15 @@ class IndexController extends Controller
         $r = mt_rand() / mt_getrandmax();
         $random_id = intval(count($chm_question) * $r);
         $random_id = $chm_question[$random_id]->id;
-        $chosen_question = Question::where('id', '=', $random_id)->first();
+        $question = Question::where('id', '=', $random_id);
+        $chosen_question = $question->first();
+       
+        $field = Question::Find($random_id)->field->title;
         $answer_array = explode("\\\\", $chosen_question->answers);
 
 
-        return view('admin/examstart', ['question' => $chosen_question, 'answer_array' => $answer_array, 'quiz_number' => 1, 'time' => $time]);
+
+        return view('admin/examstart', ['field' => $field,'question' => $chosen_question, 'answer_array' => $answer_array, 'quiz_number' => 1, 'time' => $time]);
     }
     public function nextExam(Request $request){
         //get input question id, answer, current number
@@ -137,7 +141,7 @@ class IndexController extends Controller
         //push next question
         $chm_question = Field::find(1)->questions;
 
-        if($current_num > $quiz_count / 2)
+        if($current_num >= $quiz_count / 2)
         {
             $chm_question = Field::find(2)->questions;
         }
@@ -147,7 +151,8 @@ class IndexController extends Controller
         $random_id = $chm_question[$random_id]->id;
         $chosen_question = Question::where('id', '=', $random_id)->first();
         $answer_array = explode("\\\\", $chosen_question->answers);
-        return view('admin/examstart', ['question' => $chosen_question, 'answer_array' => $answer_array, 'quiz_number' => ($current_num + 1), 'time' => $time]);
+        $field = Question::Find($random_id)->field->title;
+        return view('admin/examstart', ['field' => $field, 'question' => $chosen_question, 'answer_array' => $answer_array, 'quiz_number' => ($current_num + 1), 'time' => $time]);
     }
     public function showReports()
     {

@@ -9,7 +9,7 @@
             <div id="timer"></div>
             
         </div>
-
+        <h4>{{$field}}</h4>
         <div class="block-content collapse in">
             <div class="span12">
                 <div class="well" style="margin-top:30px;">
