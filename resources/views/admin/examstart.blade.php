@@ -95,11 +95,13 @@
                 $(this).attr('id', '0');
             }
         });
+        var timer;
         $('#next').click(function(){
             var current_num = $('#current_num').text() / 1;
             var answer = '';
             var question_id = {{$question->id}};
             event.preventDefault();
+
             for(var i = 0; i < {{count($answer_array)}}; i++)
             {
                 if($('.answer'+ (i + 1)).attr('id') == 1)
@@ -108,7 +110,7 @@
                     answer += ',';
                 }
             }
-
+            clearInterval(timer);
             $.ajax({type: "POST", url: "/examnext", data: 
                 {
                     '_token': $('meta[name="csrf-token"]').attr('content'),
@@ -124,7 +126,7 @@
         function timer(){
             $('#timer').text("Left Time {{$time}} : 00");
             var left_time = {{$time}} * 60;
-            var timer = setInterval(function(){
+            timer = setInterval(function(){
                 left_time--;
                 if(left_time == 0) 
                 {
@@ -140,6 +142,7 @@
                             answer += ',';
                         }
                     }
+                    clearInterval(timer);
                     $.ajax({type: "POST", url: "/examnext", data: 
                         {
                         '_token': $('meta[name="csrf-token"]').attr('content'),
