@@ -29,6 +29,7 @@ Route::post('/examnext', 'IndexController@nextExam');
 Route::post('/reports', 'IndexController@showReports');
 Route::post('/viewquestion', 'AdminController@viewquestion');
 Route::post('/addquestion', 'AdminController@addquestion');
+Route::post('/view', 'IndexController@view');
 
 Route::auth();
 

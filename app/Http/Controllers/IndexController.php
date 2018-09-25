@@ -43,7 +43,12 @@ class IndexController extends Controller
         //save data to exam table
         $exam = new Exam;
         $exam->user_id = User::where('email', \Auth::user()->email)->first()->id;
+        $exam->quiz_count = env('QUIZ_COUNT');
         $exam->save();
+        
+        //increase count of exam in user table
+        User::find($exam->user_id)->increment('exam_count');
+
 
         //push first question chosen randomly 
         $time = env('TIME');
@@ -116,6 +121,16 @@ class IndexController extends Controller
                     ->orderby('created_at','desc')
                     ->take(1)
                     ->update(['aver_score' => $aver_score, 'not_finished' => false]);
+            //update total_score in user table
+
+
+            $user = User::find($user_id);
+            $exam_count = $user->exam_count;
+            $current_score = $user->total_score;
+            $total_score = round((($exam_count - 1) * $current_score + $aver_score) / $exam_count, 2);
+            $user->total_score = $total_score;
+            $user->save();
+
 
             return view('admin/examend', ['quiz_count' => $quiz_count, 'aver_score' => $aver_score]);
         }
@@ -136,6 +151,22 @@ class IndexController extends Controller
     }
     public function showReports()
     {
-        return view('admin/reports');
+        $user = User::where('email', \Auth::user()->email)->first();
+        $user_id = $user->id;
+        $exam_count = $user->exam_count;
+        $total_score = $user->total_score;
+        $reports = Exam::where('user_id', $user_id)->get();
+        
+        return view('admin/reports', ['exam_count' => $exam_count, 'total_score' => $total_score, 'reports' => $reports]);
+    }
+
+    public function view(Request $request)
+    {
+        $user = User::where('email', \Auth::user()->email)->first();
+        $user_id = $user->id;
+        $created_at = $request->input('created_at');
+        $reports = Exam::where('user_id', $user_id)->get();
+        
+        return view('admin/reports', ['exam_count' => $exam_count, 'total_score' => $total_score, 'reports' => $reports]);
     }
 }

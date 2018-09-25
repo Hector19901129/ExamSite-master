@@ -17,6 +17,7 @@ class CreateExamsTable extends Migration
             $table->integer('user_id');
             $table->float('aver_score');
             $table->boolean('not_finished');
+            $table->integer('quiz_count');
             $table->timestamps("created_at");
         });
     }

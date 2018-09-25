@@ -16,4 +16,9 @@ class Report extends Model
     {
         return $this->belongsToMany('App\Exam')->withTimestamps();
     }
+
+    public function question()
+    {
+        return $this->belongsTo('App\Question');
+    }
 }
