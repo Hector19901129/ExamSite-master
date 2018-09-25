@@ -41,9 +41,14 @@
                                             <ul class="pager wizard pull-right">
                                                 
                                                 <!-- <li class="next last" style=""><a href="javascript:void(0);" id="back">Back</a></li> -->
+                                                
+                                                
                                                 <li class="next last" style=""><a href="javascript:void(0);" id="addAnswer">Answer + </a></li>
+                                                
                                                 <li class="next last" style=""><a href="javascript:void(0);" id="subAnswer">Answer - </a></li>
-                                                <li class="next"><a href="javascript:void(0);" id="save">Save</a></li>
+
+                                                <li class="next"><a href="" id="save">Save</a></li>
+
                                                 
                                             </ul>
                                         </div>  
@@ -139,12 +144,23 @@
             });
             
             $('#save').click(function() {
+
                 event.preventDefault();
                 var answer = "";
                 var right_answer_num = "";
                 var multi_option = false;
+
+                if( $('#title').val() == ""){
+                    alert('Input title!')
+                    return;
+                }
                 for(var i = 0; i < answer_num; i++){
+                    if($('#answer'+(i + 1)).val() == ""){
+                        alert('Input Answer'+ (i + 1));
+                        return;
+                    }
                     answer += $('#answer'+(i + 1)).val();
+                    
                     answer += "\\\\";
                     if($('#checkbox'+(i + 1)).is(':checked'))
                     {

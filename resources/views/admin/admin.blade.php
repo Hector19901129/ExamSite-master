@@ -48,7 +48,7 @@
                     <div class="block">
                         <div class="navbar navbar-inner block-header">
                             <div class="muted pull-left">Latest Students</div>
-                            <div class="pull-right"><span class="badge badge-info">17</span>
+                            <div class="pull-right"><span class="badge badge-info">{{$user_count}}</span>
 
                             </div>
                         </div>

@@ -31,8 +31,9 @@ class HomeController extends Controller
         {
             $users_count = Role::find(2)->users()->count();
             $questions_count = Question::count();
+            $user_count = count(Role::find(2)->users()->get());
             $recent_users =  Role::find(2)->users()->orderby('created_at', 'desc')->take(5)->get();
-            return view('admin/index', ['name' => $request->user()->name, 'role_id' => $request->user()->role_id, 'users_count' => $users_count, 'questions_count' => $questions_count, 'recent_users' => $recent_users]);
+            return view('admin/index', ['name' => $request->user()->name, 'role_id' => $request->user()->role_id, 'users_count' => $users_count, 'questions_count' => $questions_count, 'recent_users' => $recent_users, 'user_count' => $user_count]);
         }
         else
         {

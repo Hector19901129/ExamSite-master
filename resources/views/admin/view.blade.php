@@ -14,7 +14,7 @@
                     <h4>{{$question->quiz}}</h4>
                     
                     @for($i = 0; $i < count($answer_array) - 1; $i++)
-                            <button type="button" class="btn btn-large btn-block" id="answer{{$i + 1}}" style="text-align:left;padding-left:20px;padding-right:20px;">
+                            <button type="button" class="btn btn-large btn-block" id="answer{{$i + 1}}" style="text-align:left;padding-left:20px;padding-right:20px;margin-top:5px;">
                             {{$i + 1}}.{{$answer_array[$i]}}
                             @if(in_array(($i + 1), $right_answer_id))
                                 <i class="icon-ok pull-right"></i>
