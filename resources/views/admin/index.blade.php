@@ -143,7 +143,7 @@
                                         <div style="color:white">Average Score </div>
                                 </div>
                                 <div class="span6">
-                                        <i class="fa fa-user-plus pull-right" style="font-size:50px;margin-top:40px;opacity:50%"></i>
+                                        <i class="fa fa-leanpub pull-right" style="font-size:50px;margin-top:40px;opacity:50%"></i>
                                 </div>
                                 
 
@@ -162,7 +162,7 @@
                                             <div style="color:white">Total Exam </div>
                                     </div>
                                     <div class="span6">
-                                            <i class="fa fa-question-circle-o pull-right" style="font-size:50px;margin-top:40px;opacity:50%"></i>
+                                            <i class="fa fa-pencil-square-o pull-right" style="font-size:50px;margin-top:40px;opacity:50%"></i>
                                     </div>
                                     
 
