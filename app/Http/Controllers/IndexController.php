@@ -19,8 +19,15 @@ class IndexController extends Controller
     }
 
     public function index(){
-        
-        return view('admin/user');
+
+        $user = User::where('email', \Auth::user()->email)->first();
+        $user_id = $user->id;
+        $total_score = $user->total_score;
+        $exam_count =$user->exam_count;
+        $reports = Exam::where('user_id', $user_id)->get();
+        $reports_count = count($reports);
+        $reports = Exam::where('user_id', $user_id)->take(5)->get();
+        return view('admin/user', ['exam_count' => $exam_count, 'total_score' => $total_score, 'reports' => $reports, 'reports_count' => $reports_count]);
     }
     public function training(){
         //push random question

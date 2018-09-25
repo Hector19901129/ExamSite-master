@@ -11,7 +11,7 @@
                                     
                                     <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example2">
                                         <thead>
-                                            <tr>
+                                            <tr> 
                                                 <th style="width:10%">No</th>
                                                 <th style="width:15%">Score</th>
                                                 <th style="width:15%">Question Count</th>

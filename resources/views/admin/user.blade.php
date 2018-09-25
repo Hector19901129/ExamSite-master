@@ -5,7 +5,7 @@
                     <div class="block">
                         <div class="navbar navbar-inner block-header users">
                                 <div class="span6">
-                                        <div class=" muted pull-left"></div><span class="big">1.23  </span>
+                                        <div class=" muted pull-left"></div><span class="big">{{$total_score}}</span>
                                         <div style="color:white">Average Score </div>
                                 </div>
                                 <div class="span6">
@@ -24,7 +24,7 @@
                     <div class="block">
                             <div class="navbar navbar-inner block-header questions">
                                     <div class="span6">
-                                            <div class=" muted pull-left"></div><span class="big">1,234</span>
+                                            <div class=" muted pull-left"></div><span class="big">{{$exam_count}}</span>
                                             <div style="color:white">Total Exam </div>
                                     </div>
                                     <div class="span6">
@@ -48,7 +48,7 @@
                     <div class="block">
                 <div class="navbar navbar-inner block-header">
                     <div class="muted pull-left">Latest Reports</div>
-                    <div class="pull-right"><span class="badge badge-info">17</span>
+                    <div class="pull-right"><span class="badge badge-info">{{$reports_count}}</span>
 
                     </div>
                 </div>
@@ -56,36 +56,29 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th style="width:10%;">#</th>
-                                <th style="width:20%;"> Score(out of 5)</th>
-                                <th style="width:20%;"> Time to Complete </th>
-                                <th style="width:25%;"> Start Time </th>
-                                <th style="width:25%;"> Comment </th>
+                            <th style="width:10%">No</th>
+                            <th style="width:20%">Score</th>
+                            <th style="width:20%">Question Count</th>
+                            <th style="width:30%">Date and Time</th>
+                            <th style="width:20%">Issue</th>
                                 
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Mark Otto</td>
-                                <td>1 hour ago</td>
-                                <td>Mark Otto</td>
-                                <td>1 hour ago</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Jacob Thornton</td>
-                                <td>10 hours ago</td>
-                                <td>Mark Otto</td>
-                                <td>1 hour ago</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Vincent Gabriel</td>
-                                <td>2 days ago</td>
-                                <td>Mark Otto</td>
-                                <td>1 hour ago</td>
-                            </tr>
+                            @for($i = 0; $i < count($reports); $i++)
+                                <tr class="odd gradeX">
+                                    <td class="center">{{$i + 1}}</td>
+                                    <td class="center">{{$reports[$i]->aver_score}}</td>
+                                    <td class="center">{{$reports[$i]->quiz_count}}</td>
+                                    <td class="center">{{$reports[$i]->created_at}}</td>
+                                    <td class="center">
+                                        @if($reports[$i]->not_finished == true)
+                                            Not completed
+                                        @endif
+                                    </td>
+                                    
+                                </tr>
+                            @endfor
                             
                         </tbody>
                     </table>

@@ -6,6 +6,7 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Role;
 use App\Question;
+use App\Exam;
 
 class HomeController extends Controller
 {
@@ -35,10 +36,13 @@ class HomeController extends Controller
         }
         else
         {
-            $users_count = Role::find(2)->users()->count();
-            $questions_count = Question::count();
-            $recent_users =  Role::find(2)->users()->orderby('created_at')->take(5);
-            return view('admin/index', ['name' => $request->user()->name, 'role_id' => $request->user()->role_id, 'users_count' => $users_count, 'questions_count' => $questions_count, 'recent_users' => $recent_users]);
+            $total_score = $request->user()->total_score;
+            $exam_count = $request->user()->exam_count;
+            $user_id = $request->user()->id;
+            $reports = Exam::where('user_id', $user_id)->get();
+            $reports_count = count($reports);
+            $reports = Exam::where('user_id', $user_id)->take(5)->get();
+            return view('admin/index', ['name' => $request->user()->name, 'role_id' => $request->user()->role_id, 'exam_count' => $exam_count, 'total_score' => $total_score, 'reports' => $reports, 'reports_count' => $reports_count]);
         }
 
 
