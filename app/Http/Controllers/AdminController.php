@@ -26,6 +26,7 @@ class AdminController extends Controller
     public function showDashboard(){
         $users_count = Role::find(2)->users()->count();
         $questions_count = Question::count();
+        $users_count = count(Role::find(2)->users()->get());
         $recent_users =  Role::find(2)->users()->orderby('created_at', 'desc')->take(5)->get();
         return view('admin/admin', ['users_count' => $users_count, 'questions_count' => $questions_count, 'recent_users' => $recent_users]);
  
