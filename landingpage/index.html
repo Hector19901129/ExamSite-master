@@ -1,11 +1,20 @@
-<!DOCTYPE html>
+﻿<!doctype html>
 <html lang="en">
-<head> 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<head>
+
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="Responsive Bootstrap App Landing Page Template">
+
+
+    <!-- =========================
+          BASIC PAGE INFORMATION
+    ============================== -->
+    <!-- PAGE TITLE -->
     <title>Grile admitere medicina 2019!</title>
+
+    <!-- WHAT'S YOUR PAGE ABOUT? -->
+    <meta name="description" content="Responsive Bootstrap App Landing Page Template">
 
     <!-- KEYWORDS THAT DESCRIBES YOUR PAGE -->
     <meta name="keywords" content="khales, Bootstrap, Landing page, Template, App, Mobile">
@@ -16,14 +25,10 @@
     <!-- ALLOW GOOGLE TO INDEX YOUR PAGE -->
     <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
 
-
-    <!-- Fonts -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700"> -->
-
-    <!-- Styles -->
-    
-    
+    <!-- =========================
+          FAV & TOUCH ICONS
+    ============================== -->
+    <!-- FAVICON FOR DESKTOPS -->
     <link rel="icon" href="img/favicon/favicon.ico">
 
     <!-- SET OF FAVICONS FOR APPLE PRODUCTS -->
@@ -60,11 +65,19 @@
     <!-- ALIVE THEME ANIMATIONS -->
     <!-- ANIMATIONS BASED ON ANIMATE.CSS -->
     <link href="css/animations/animations.css" rel="stylesheet" type="text/css">
-    
-    {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
-    
+
+    <!-- =========================
+         INTERNET EXPLORER FIXES
+    ============================== -->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 </head>
+
 <body id="body" class="page-loading">
 
     <!-- =========================
@@ -96,11 +109,8 @@
             <div class="buttons-cont">
 
                 <!-- OPEN MODAL WITH LOGIN FORM -->
-                @if (Auth::guest())
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#joinUs">Incepe Acum</button>
-                @else
-                    <a type="button" class="btn btn-primary" href="{{ url('/home')}}">Incepe Acum</a>
-                @endif
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#joinUs">Incepe Acum</button>
+
                 <!-- BUY BUTTON - PLACE LINK TO YOUR APP HERE 
                 <button type="button" class="btn btn-success" onclick="location.reload();location.href='#'">Buy The Book</button>-->
 
@@ -137,16 +147,7 @@
 
         </div>
     </nav>
-    @if ($errors->has('email'))
-        <span class="help-block">
-            <strong>{{ $errors->first('email') }}</strong>
-        </span>
-    @endif
-    @if ($errors->has('password'))
-        <span class="help-block">
-            <strong>{{ $errors->first('password') }}</strong>
-        </span>
-    @endif
+
     <!-- =========================
          JOIN US MODAL
     ============================== -->
@@ -168,9 +169,8 @@
 
                 <!-- LOGIN FORM -->
                 <div class="modal-body" id="login">
-                    <form class="form-horizontal" role="form" autocomplete="off" data-toggle="validator" method="POST" action="{{ url('/login') }}">
-                        {{ csrf_field() }}
-                        <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
+                    <form class="form-horizontal" role="form" autocomplete="off" data-toggle="validator">
+                        <div class="form-group">
 
                             <!-- E-MAIL INPUT -->
                             <div class="input-group col-xs-12">
@@ -179,20 +179,16 @@
                                 <div class="input-group-addon"><span class="elegant icon_mail_alt"></span></div>
 
                                 <!-- INPUT -->
-                                <input type="email" class="form-control" name="email" placeholder="e-mail adress" autocomplete="off" value="{{ old('email') }}" required autofocus>
-                                
+                                <input type="email" class="form-control" id="login-email" placeholder="e-mail adress" autocomplete="off" required>
+
                             </div>
-                            @if ($errors->has('email'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('email') }}</strong>
-                                </span>
-                            @endif
+
                             <!-- ERROR MESSAGE BOX -->
                             <div class="help-block with-errors"></div>
 
                         </div>
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                        <div class="form-group">
 
                             <!-- PASSWORD INPUT -->
                             <div class="input-group col-xs-12">
@@ -201,14 +197,10 @@
                                 <div class="input-group-addon"><span class="icon-password">*</span></div>
 
                                 <!-- INPUT -->
-                                <input type="password" class="form-control" name="password" placeholder="password" autocomplete="off" data-minlength="5" required>
-                                
+                                <input type="password" class="form-control" id="login-password" placeholder="password" autocomplete="off" data-minlength="5" required>
+
                             </div>
-                            @if ($errors->has('password'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('password') }}</strong>
-                                </span>
-                            @endif
+
                             <!-- ERROR MESSAGE BOX -->
                             <div class="help-block with-errors"></div>
 
@@ -230,18 +222,15 @@
                         </div>
 
                         <!--CHANGE FORM TO PASSWORD REMINDER-->
-                        <p class="other" id="gotoRemind">
-                            <a href="{{ url('/password/reset')}}"></a>
-                        </p>
+                        <p class="other" id="gotoRemind">forgot your password?</p>
 
                     </form>
                 </div>
 
                 <!-- REGISTRATION FORM -->
                 <div class="modal-body noopacity nodisplay" id="register">
-                    <form class="form-horizontal" role="form" autocomplete="off" data-toggle="validator" method="POST" action="{{ url('/register') }}">
-                        {{ csrf_field() }}
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                    <form class="form-horizontal" role="form" autocomplete="off" data-toggle="validator">
+                        <div class="form-group">
 
                             <!-- E-MAIL INPUT -->
                             <div class="input-group col-xs-12">
@@ -250,41 +239,16 @@
                                 <div class="input-group-addon"><span class="elegant icon_mail_alt"></span></div>
 
                                 <!-- INPUT -->
-                                <input type="text" class="form-control" id="name" placeholder="name" autocomplete="off" value="{{ old('name') }}" required autofocus>
+                                <input type="email" class="form-control" id="register-email" placeholder="e-mail adress" autocomplete="off" required>
 
                             </div>
-                            @if ($errors->has('name'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('name') }}</strong>
-                                </span>
-                            @endif
-                            <!-- ERROR MESSAGE BOX -->
-                            <div class="help-block with-errors"></div>
 
-                        </div>
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-
-                            <!-- E-MAIL INPUT -->
-                            <div class="input-group col-xs-12">
-
-                                <!-- ICON -->
-                                <div class="input-group-addon"><span class="elegant icon_mail_alt"></span></div>
-
-                                <!-- INPUT -->
-                                <input type="email" class="form-control" name="email" placeholder="e-mail adress" value="{{ old('email') }}" autocomplete="off" required>
-
-                            </div>
-                            @if ($errors->has('email'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('email') }}</strong>
-                                </span>
-                            @endif
                             <!-- ERROR MESSAGE BOX -->
                             <div class="help-block with-errors"></div>
 
                         </div>
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                        <div class="form-group">
 
                             <!-- PASSWORD INPUT -->
                             <div class="input-group col-xs-12">
@@ -293,20 +257,16 @@
                                 <div class="input-group-addon"><span class="icon-password">*</span></div>
 
                                 <!-- INPUT -->
-                                <input type="password" class="form-control" id="password" name="password" placeholder="password" autocomplete="off" data-minlength="5" required>
+                                <input type="password" class="form-control" id="register-password" placeholder="password" autocomplete="off" data-minlength="5" required>
 
                             </div>
-                            @if ($errors->has('password'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('password') }}</strong>
-                                </span>
-                            @endif
+
                             <!-- ERROR MESSAGE BOX -->
                             <div class="help-block with-errors"></div>
 
                         </div>
 
-                        <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+                        <div class="form-group">
 
                             <!-- PASSWORD REPEAT INPUT -->
                             <div class="input-group col-xs-12">
@@ -315,14 +275,10 @@
                                 <div class="input-group-addon"><span class="icon-repeat">**</span></div>
 
                                 <!-- INPUT -->
-                                <input type="password" class="form-control" name="password_confirmation" placeholder="repeat password" autocomplete="off" data-match="#register-password" required>
+                                <input type="password" class="form-control" id="register-repeat" placeholder="repeat password" autocomplete="off" data-match="#register-password" required>
 
                             </div>
-                            @if ($errors->has('password_confirmation'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                </span>
-                            @endif
+
                             <!-- ERROR MESSAGE BOX -->
                             <div class="help-block with-errors"></div>
 
@@ -403,6 +359,7 @@
             </div>
         </div>
     </div>
+
     <!-- =========================
          HEADER
     ============================== -->
@@ -441,8 +398,7 @@
 
                         <!-- DOWNLOAD BUTTON -->
                         <div class="btn btn-lg btn-success anim-bounce-left">
-                        @if (Auth::guest())
-                            <a href="javascript:void(0);" data-toggle="modal" data-target="#joinUs">
+                            <a href="#">
 
                                 <!-- ICON -->
                                 <span class="elegant icon_book"></span>
@@ -451,22 +407,20 @@
                                 Incepe Acum!!
 
                             </a>
-                            
-                        @else
-                            <a href="{{ url('/home')}}">
-
-                                <!-- ICON -->
-                                <span class="elegant icon_book"></span>
-
-                                <!-- BUTTON TEXT -->
-                                Incepe Acum!!
-
-                            </a>
-                        @endif
-                            
                         </div>
 
-                        
+                        <!-- LEARN MORE BUTTON
+                        <div class="btn btn-lg btn-info anim-bounce-right">
+                            <a href="#features">
+
+                                 ICON 
+                                <span class="elegant arrow_carrot-2down"></span>
+
+                                <!-- BUTTON TEXT 
+                                Learn more
+
+                            </a>
+                        </div> -->
 
                     </div>
 
@@ -489,6 +443,7 @@
         </div>
 
     </section>
+
     <!-- =========================
          FEATURES
     ============================== -->
@@ -691,10 +646,12 @@
             </div>
         </div>
     </section>
+
     <!-- =========================
          ABOUT
     ============================== -->
     <section id="about">
+ 
         <h2 class="anim-fade-up">
 
             <!-- MAIN TITLE -->
@@ -705,12 +662,21 @@
 
         </h2>
     </section>
-    <!-- COPYRIGHT -->
+
+
+
+            <!-- COPYRIGHT -->
     <div class="col-sm-3 col-xs-12 footerinfo">
         © 2017 all rights reserved.
         <br />
         <a data-toggle="modal" data-target="#PrivacyModal">Privacy</a> | <a data-toggle="modal" data-target="#TermOfUseModal">Terms of Use</a>
     </div>
+
+  
+    
+    <!-- =========================
+         FOOTER MODALS
+    ============================== -->
     <!-- PRIVACY MODAL -->
     <div class="modal fade" id="PrivacyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -757,11 +723,10 @@
         </div>
     </div>
 
-
-
-
-    
-    <!-- JavaScripts -->
+    <!-- =========================
+         JS SCRIPTS
+    ============================== -->
+    <!-- JQUERY -->
     <script type="text/javascript" src="js/jquery_1.11.1.min.js"></script>
 
     <!-- BOOTSTRAP SCRIPTS -->
@@ -798,7 +763,5 @@
     <!--GOOGLE MAPS -->
     <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu5nZKbeK-WHQ70oqOWo-_4VmwOwKP9YQ"></script> -->
     <!-- <script type="text/javascript" src="js/custom.js"></script> -->
-    
-    {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>
 </html>
