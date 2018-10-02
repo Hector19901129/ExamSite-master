@@ -43,7 +43,14 @@ class HomeController extends Controller
             $reports = Exam::where('user_id', $user_id)->get();
             $reports_count = count($reports);
             $reports = Exam::where('user_id', $user_id)->take(5)->get();
-            return view('admin/index', ['name' => $request->user()->name, 'role_id' => $request->user()->role_id, 'exam_count' => $exam_count, 'total_score' => $total_score, 'reports' => $reports, 'reports_count' => $reports_count]);
+            $created_at = strtotime($request->user()->created_at);
+            $today = time();
+            $diff = 7 - intval(floor(($today - $created_at) / 86400));
+            if($diff <= 0){
+                return view("admin/exception", ["alert" => "You have to upgrade membership to use this app. please claim membership!"]);
+                
+            }
+            return view('admin/index', ['name' => $request->user()->name, 'role_id' => $request->user()->role_id, 'exam_count' => $exam_count, 'total_score' => $total_score, 'reports' => $reports, 'reports_count' => $reports_count, 'rest' => $diff]);
         }
 
 

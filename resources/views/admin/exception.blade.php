@@ -1,8 +1,8 @@
 
 
         <script>
-            alert('This exam have no questions!');
-            
+            alert("{{$alert}}");
+            history.back();
         </script>
         
        

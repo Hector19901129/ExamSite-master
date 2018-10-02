@@ -199,7 +199,7 @@ class IndexController extends Controller
             $your_answer_array = explode(',', $your_answer);
             $quiz_count = count($views);
         } catch (\Exception $exception) {
-            return view('admin/exception');
+            return view('admin/exception', ["alert" => "This exam have no questions!"]);
         }
         return view('admin/view', ['quiz_count' => $quiz_count, 'created_at' => $created_at, 'question' => $question, 'field' => $field, 'answer_array' => $answer_array, 'right_answer_id' => $right_answer_id, 'current_num' => $current_num, 'your_answer_array' => $your_answer_array]);
     }
