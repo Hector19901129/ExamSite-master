@@ -179,6 +179,10 @@
                 }
                 $.ajax({type: "POST", url: "/addquestion", data: data, success: function(result){
                         alert("Added a question successfully!");
+                        $("#title").val("");
+                        for(var i = 0; i < answer_num; i++){
+                            $('#answer'+(i + 1)).val("");
+                        }
                 }});
                 
             });
